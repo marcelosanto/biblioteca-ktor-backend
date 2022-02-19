@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -24,7 +24,6 @@ sourceSets {
 
 repositories {
     mavenLocal()
-    jcenter()
     mavenCentral()
 }
 
@@ -33,6 +32,11 @@ dependencies {
     implementation "io.ktor:ktor-server-netty:$ktor_version"
     implementation "ch.qos.logback:logback-classic:$logback_version"
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
+
+
+    //jwt
+    implementation("io.ktor:ktor-auth:$ktor_version")
+    implementation("io.ktor:ktor-auth-jwt:$ktor_version")
 
     //Gson
     implementation("io.ktor:ktor-gson:1.6.7")
