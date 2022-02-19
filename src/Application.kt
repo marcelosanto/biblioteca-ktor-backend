@@ -1,12 +1,13 @@
 package com.xyz.marcelosantos
 
-import com.xyz.marcelosantos.entities.Livro
+import com.xyz.marcelosantos.entities.LivroDraft
 import com.xyz.marcelosantos.repository.InMemoryLivroRepository
 import com.xyz.marcelosantos.repository.LivroRepository
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
 import io.ktor.http.*
+import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
@@ -19,8 +20,8 @@ fun Application.module(testing: Boolean = false) {
     routing {
 
         install(CallLogging)
-        install(ContentNegotiation){
-            gson{
+        install(ContentNegotiation) {
+            gson {
                 setPrettyPrinting()
             }
         }
@@ -34,14 +35,14 @@ fun Application.module(testing: Boolean = false) {
         get("/obras/{id}") {
             val id = call.parameters["id"]?.toIntOrNull()
 
-            if(id==null) {
+            if (id == null) {
                 call.respond(HttpStatusCode.BadRequest, "id informado é invalido")
                 return@get
             }
 
             val livro = repository.getLivro(id)
 
-            if (livro == null){
+            if (livro == null) {
                 call.respond(HttpStatusCode.NotFound, "Livro não encontrado")
                 return@get
             }
@@ -49,10 +50,46 @@ fun Application.module(testing: Boolean = false) {
             call.respond(livro)
         }
 
-        post("/obras") {}
+        post("/obras") {
+            val livroDraft = call.receive<LivroDraft>()
+            val livro = repository.addLivro(livroDraft)
 
-        put("/obras/{id}") {  }
+            call.respond(livro)
+        }
 
-        delete("/obras/{id}") {}
+        put("/obras/{id}") {
+            val livroDraft = call.receive<LivroDraft>()
+            val livroId = call.parameters["id"]?.toIntOrNull()
+
+            if (livroId == null) {
+                call.respond(HttpStatusCode.BadRequest, "id informado é invalido")
+                return@put
+            }
+
+            val livroUpdate = repository.updateLivro(livroId, livroDraft)
+
+            if (livroUpdate) {
+                call.respond(HttpStatusCode.OK, "As informações do livro foram atualizadas")
+            } else {
+                call.respond(HttpStatusCode.NotFound, "Livro não encontrado com o id $livroId informado.")
+            }
+        }
+
+        delete("/obras/{id}") {
+            val livroId = call.parameters["id"]?.toIntOrNull()
+
+            if (livroId == null) {
+                call.respond(HttpStatusCode.BadRequest, "id informado é invalido")
+                return@delete
+            }
+
+            val livroRemoved = repository.removeLivro(livroId)
+            if (livroRemoved) {
+                call.respond(HttpStatusCode.OK, "Livro removido")
+            } else {
+                call.respond(HttpStatusCode.NotFound, "Livro não encontrado com o id $livroId informado.")
+            }
+
+        }
     }
 }
