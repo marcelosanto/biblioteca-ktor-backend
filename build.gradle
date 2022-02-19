@@ -2,7 +2,7 @@ buildscript {
     repositories {
         jcenter()
     }
-    
+
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
@@ -25,6 +25,7 @@ sourceSets {
 repositories {
     mavenLocal()
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -32,6 +33,17 @@ dependencies {
     implementation "io.ktor:ktor-server-netty:$ktor_version"
     implementation "ch.qos.logback:logback-classic:$logback_version"
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
-    implementation("io.ktor:ktor-gson:$ktor_version")
+
+    //Gson
+    implementation("io.ktor:ktor-gson:1.6.7")
+
+    // database
+    implementation 'org.ktorm:ktorm-core:3.4.1'
+    implementation 'org.ktorm:ktorm-support-mysql:3.4.1'
+    implementation 'mysql:mysql-connector-java:8.0.25'
+
+    //dotenv
+    implementation 'io.github.cdimascio:dotenv-kotlin:6.2.2'
+
 
 }

@@ -1,8 +1,8 @@
 package com.xyz.marcelosantos
 
 import com.xyz.marcelosantos.entities.LivroDraft
-import com.xyz.marcelosantos.repository.InMemoryLivroRepository
 import com.xyz.marcelosantos.repository.LivroRepository
+import com.xyz.marcelosantos.repository.MySQLLivroRepository
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
@@ -14,8 +14,7 @@ import io.ktor.routing.*
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @Suppress("unused") // Referenced in application.conf
-@kotlin.jvm.JvmOverloads
-fun Application.module(testing: Boolean = false) {
+fun Application.module() {
 
     routing {
 
@@ -26,7 +25,7 @@ fun Application.module(testing: Boolean = false) {
             }
         }
 
-        val repository: LivroRepository = InMemoryLivroRepository()
+        val repository: LivroRepository = MySQLLivroRepository()
 
         get("/obras") {
             call.respond(repository.getAllLivros())
