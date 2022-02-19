@@ -1,36 +1,6 @@
 package com.xyz.marcelosantos.repository
 
-import com.xyz.marcelosantos.entities.Livro
-import com.xyz.marcelosantos.entities.LivroDraft
-
-class InMemoryLivroRepository : LivroRepository {
-    private val livros = mutableListOf<Livro>(
-        Livro(1, "Harry Potter", "Rocco", "https://i.imgur.com/UH3IPXw.jpg", listOf("JK Rowling", "...")),
-        Livro(
-            2,
-            "Harry Potter e a Pedra filosofal",
-            "Rocco",
-            "https://i.imgur.com/UH3IPXw.jpg",
-            listOf("JK Rowling", "...")
-        ),
-        Livro(
-            3,
-            "Harry Potter e o prisioneiro de askaban",
-            "Rocco",
-            "https://i.imgur.com/UH3IPXw.jpg",
-            listOf("JK Rowling", "...")
-        ),
-        Livro(
-            4, "Harry Potter calice de fogo", "Rocco", "https://i.imgur.com/UH3IPXw.jpg", listOf("JK Rowling", "...")
-        ),
-        Livro(
-            5,
-            "Harry Potter e a ordem da fenix",
-            "Rocco",
-            "https://i.imgur.com/UH3IPXw.jpg",
-            listOf("JK Rowling", "...")
-        ),
-    )
+/*class InMemoryLivroRepository : LivroRepository {
 
     override fun getAllLivros(): List<Livro> {
         return livros
@@ -68,4 +38,4 @@ class InMemoryLivroRepository : LivroRepository {
 
     override fun removeLivro(id: Int) = livros.removeIf { it.id == id }
 
-}
+}*/

@@ -5,5 +5,5 @@ data class Livro(
     var titulo: String,
     var editora: String,
     var foto: String,
-    var autores: List<String>
+    var autores: String
 )
