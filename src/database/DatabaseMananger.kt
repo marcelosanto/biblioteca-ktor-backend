@@ -10,11 +10,12 @@ import org.ktorm.dsl.update
 import org.ktorm.entity.firstOrNull
 import org.ktorm.entity.sequenceOf
 import org.ktorm.entity.toList
+import java.net.URI
 
 class DatabaseMananger {
 
     //config
-    private val hostname = System.getenv("HOSTNAME")
+    private val hostname = URI(System.getenv("HOSTNAME"))
     private val databaseName = System.getenv("DATA_BASE")
     private val username = System.getenv("USER_NAME")
     private val password = System.getenv("PASSWORD")
