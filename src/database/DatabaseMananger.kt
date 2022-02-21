@@ -2,7 +2,6 @@ package com.xyz.marcelosantos.database
 
 import com.xyz.marcelosantos.entities.Livro
 import com.xyz.marcelosantos.entities.LivroDraft
-import io.github.cdimascio.dotenv.dotenv
 import org.ktorm.database.Database
 import org.ktorm.dsl.delete
 import org.ktorm.dsl.eq
@@ -14,14 +13,11 @@ import org.ktorm.entity.toList
 
 class DatabaseMananger {
 
-    private val dotenv = dotenv()
-
-
     //config
-    private val hostname = dotenv["HOSTNAME"]
-    private val databaseName = dotenv["DATA_BASE"]
-    private val username = dotenv["USER_NAME"]
-    private val password = dotenv["PASSWORD"]
+    private val hostname = System.getenv("HOSTNAME")
+    private val databaseName = System.getenv("DATA_BASE")
+    private val username = System.getenv("USER_NAME")
+    private val password = System.getenv("PASSWORD")
 
     //database
     private val ktormDatabase: Database

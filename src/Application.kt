@@ -7,7 +7,6 @@ import com.xyz.marcelosantos.repository.InMemoryUserRepository
 import com.xyz.marcelosantos.repository.LivroRepository
 import com.xyz.marcelosantos.repository.MySQLLivroRepository
 import com.xyz.marcelosantos.repository.UserRepository
-import io.github.cdimascio.dotenv.dotenv
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.auth.jwt.*
@@ -20,9 +19,7 @@ import io.ktor.routing.*
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
-val dotenv = dotenv()
-
-val jwtConfig = JwtConfig(dotenv["KTOR_BIBLIOTECA_JWT_SECRET"])
+val jwtConfig = JwtConfig(System.getenv("KTOR_BIBLIOTECA_JWT_SECRET"))
 
 @Suppress("unused") // Referenced in application.conf
 fun Application.module() {
