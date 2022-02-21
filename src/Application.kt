@@ -45,7 +45,7 @@ fun Application.module() {
         val userRepository: UserRepository = InMemoryUserRepository()
 
         get("/") {
-            call.respondText("Bem vindo a sua livraria")
+            call.respondText("Bem vindo ao seu Sistema de gerenciamento de biblioteca")
         }
 
         post("/login") {
